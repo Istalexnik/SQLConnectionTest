@@ -1,0 +1,23 @@
+﻿<%@ Master Language="VB" CodeFile="Main.master.vb" Inherits="MasterPages_Main" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder id="ctnHead" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="frmMainForm" runat="server">
+
+    <div id="dvPageWrapper">
+              <header><a href="/">Home Page</a></header>
+
+        <asp:ContentPlaceHolder id="ctnPH" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>
