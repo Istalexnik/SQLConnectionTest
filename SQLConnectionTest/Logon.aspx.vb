@@ -1,23 +1,24 @@
 ﻿
 Imports System.Data
 Imports System.Data.SqlClient
+Imports System.Diagnostics
 
 Partial Class Logon
     Inherits BasePage
 
-    Private Function ValidateUser(username As String, password As String) As Boolean
+    Private Function ValidateUser(email As String, password As String) As Boolean
         Dim con As SqlConnection
         Dim cmd As SqlCommand
         Dim constr As String = ConfigurationManager.ConnectionStrings("constr").ConnectionString
         Dim lookupPassword As String = ""
 
-        If (username Is Nothing) OrElse (username.Length = 0) OrElse (username.Length > 20) Then
-            System.Diagnostics.Trace.WriteLine("[ValidateUser] Input validation of userName failed.")
+        If (email Is Nothing) OrElse (email.Length = 0) OrElse (email.Length > 20) Then
+            Debug.WriteLine("[ValidateUser] Input validation of Email failed.")
             Return False
         End If
 
         If (password Is Nothing) OrElse (password.Length = 0) OrElse (password.Length > 20) Then
-            System.Diagnostics.Trace.WriteLine("[ValidateUser] Input validation of passWord failed.")
+            Debug.WriteLine("[ValidateUser] Input validation of passWord failed.")
             Return False
         End If
 
@@ -26,13 +27,13 @@ Partial Class Logon
             con.Open()
             cmd = New SqlCommand("Select col_password from tbl_siteuser where col_username=@username", con)
             cmd.Parameters.Add("@username", SqlDbType.VarChar, 25)
-            cmd.Parameters("@username").Value = username
+            cmd.Parameters("@username").Value = email
             lookupPassword = CType(cmd.ExecuteScalar, String)
 
             cmd.Dispose()
             con.Dispose()
         Catch ex As Exception
-            System.Diagnostics.Trace.WriteLine("[ValidateUser] Exception " + ex.Message)
+            Debug.WriteLine("[ValidateUser] Exception " + ex.Message)
         End Try
 
         If String.IsNullOrEmpty(lookupPassword) Then
@@ -44,10 +45,13 @@ Partial Class Logon
 
 
     Protected Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
-        If ValidateUser(txtUsername.Value, txtPassword.Value) Then
-            FormsAuthentication.RedirectFromLoginPage(txtUsername.Value, chbPersistCookie.Checked)
+        If ValidateUser(txtEmail.Value, txtPassword.Value) Then
+            FormsAuthentication.RedirectFromLoginPage(txtEmail.Value, chbPersistCookie.Checked)
         Else
             Response.Redirect("logon.aspx", True)
         End If
     End Sub
+
+
+
 End Class

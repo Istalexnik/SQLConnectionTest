@@ -4,6 +4,7 @@
 
 <html>
 <head runat="server">
+    <link rel="stylesheet" href="./styles/MainStyles.css">
     <title></title>
     <asp:ContentPlaceHolder id="ctnHead" runat="server">
     </asp:ContentPlaceHolder>
