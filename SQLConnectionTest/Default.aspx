@@ -7,6 +7,7 @@
     <br />
     <a href="./ManageUsers.aspx">Manage Users</a>
     <br />
+        <a href="./ManagePersons.aspx">Manage Persons</a>
     <br />
     <asp:Button ID="btnSignOut" runat="server" Text="Sign Out" />
 </asp:Content>

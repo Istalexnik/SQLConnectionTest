@@ -40,7 +40,7 @@
 
             <asp:TemplateField HeaderText="Delete">
                 <ItemTemplate>
-                    <asp:LinkButton ID="lbDelete" runat="server" CommandName="Delete" CommandArgument='<%# Eval("col_userid") %>'>Delete</asp:LinkButton>
+                    <asp:LinkButton OnClientClick="return confirm('Are you sure you want delete?');"  ID="lbDelete" runat="server" CommandName="Delete" CommandArgument='<%# Eval("col_userid") %>'>Delete</asp:LinkButton>
                 </ItemTemplate>
             </asp:TemplateField>
 
@@ -57,6 +57,8 @@
                 </ItemTemplate>
                 <EditItemTemplate>
                     <asp:TextBox ID="txtEmail" runat="server" Text='<%#Eval("col_email") %>'></asp:TextBox>
+                    <asp:RegularExpressionValidator ID="vEmailFormat" runat="server" ErrorMessage="*" ControlToValidate="txtEmail" 
+                        Display="Static" ValidationExpression="^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" />
                 </EditItemTemplate>
             </asp:TemplateField>
 
@@ -75,6 +77,10 @@
                 </ItemTemplate>
                 <EditItemTemplate>
                     <asp:TextBox ID="txtType" runat="server" Text='<%#Eval("col_type") %>'></asp:TextBox>
+                    <asp:DropDownList ID="ddType" runat="server" SelectedValue='<%# Eval("col_type") %>'>
+                        <asp:ListItem Value="U">User</asp:ListItem>
+                        <asp:ListItem Value="A">Admin</asp:ListItem>
+                    </asp:DropDownList>
                 </EditItemTemplate>
             </asp:TemplateField>
 
@@ -83,7 +89,7 @@
                     <asp:Label ID="lblAccessLevel" runat="server" Text='<%# Eval("col_accesslevel") %>'></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
-                    <asp:TextBox ID="txtAccessLevel" runat="server" Text='<%#Eval("col_accesslevel") %>'></asp:TextBox>
+                    <asp:TextBox ID="txtAccessLevel" runat="server" Text='<%# Eval("col_accesslevel") %>'></asp:TextBox>
                 </EditItemTemplate>
             </asp:TemplateField>
 
@@ -92,7 +98,7 @@
                     <asp:Label ID="lblPersonID" runat="server" Text='<%# Eval("col_personid") %>'></asp:Label>
                 </ItemTemplate>
                 <EditItemTemplate>
-                    <asp:TextBox ID="txtPersonID" runat="server" Text='<%#Eval("col_personid") %>'></asp:TextBox>
+                    <asp:TextBox ID="txtPersonID" runat="server" Text='<%# Eval("col_personid") %>'></asp:TextBox>
                 </EditItemTemplate>
             </asp:TemplateField>
 

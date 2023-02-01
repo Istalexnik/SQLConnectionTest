@@ -6,19 +6,27 @@
 <head runat="server">
     <link rel="stylesheet" href="./styles/MainStyles.css">
     <title></title>
-    <asp:ContentPlaceHolder id="ctnHead" runat="server">
+    <asp:ContentPlaceHolder ID="ctnHead" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="frmMainForm" runat="server">
+        <div id="dvPageWrapper">
 
-    <div id="dvPageWrapper">
-              <header><a href="/">Home Page</a></header>
+            <%--            <a href="Logon.aspx"><i class="fa fa-user"></i>
+                <asp:Label ID="lblHello" runat="server" Text="Hello"></asp:Label>
+            </a>--%>
 
-        <asp:ContentPlaceHolder id="ctnPH" runat="server">
-        
-        </asp:ContentPlaceHolder>
-    </div>
+
+            <header><a href="/">Home Page</a></header>
+
+            <br />
+            <br />
+
+
+            <asp:ContentPlaceHolder ID="ctnPH" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
     </form>
 </body>
 </html>

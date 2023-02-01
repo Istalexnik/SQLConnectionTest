@@ -39,7 +39,7 @@ Partial Class ManageUsers
                 cmd.CommandType = CommandType.Text
 
                 Using adapter As New SqlDataAdapter(cmd)
-                    Using ds As New DataSet()
+                    Using ds As New DataSet
                         adapter.Fill(ds)
                         gvShowUsers.DataSource = ds.Tables(0)
                         gvShowUsers.DataBind()
@@ -88,10 +88,12 @@ Partial Class ManageUsers
         Using con As New SqlConnection(constr)
             Using cmd As New SqlCommand(updateStatement)
                 cmd.CommandType = CommandType.Text
+
+
                 cmd.Parameters.AddWithValue("@col_userid", CType(gvShowUsers.Rows(e.RowIndex).FindControl("aUserID"), LinkButton).Text)
                 cmd.Parameters.AddWithValue("@col_email", CType(gvShowUsers.Rows(e.RowIndex).FindControl("txtEmail"), TextBox).Text)
                 cmd.Parameters.AddWithValue("@col_password", CType(gvShowUsers.Rows(e.RowIndex).FindControl("txtPassword"), TextBox).Text)
-                cmd.Parameters.AddWithValue("@col_type", CType(gvShowUsers.Rows(e.RowIndex).FindControl("txtType"), TextBox).Text)
+                cmd.Parameters.AddWithValue("@col_type", CType(gvShowUsers.Rows(e.RowIndex).FindControl("ddType"), DropDownList).SelectedValue)
                 cmd.Parameters.AddWithValue("@col_accesslevel", CType(gvShowUsers.Rows(e.RowIndex).FindControl("txtAccessLevel"), TextBox).Text)
                 cmd.Parameters.AddWithValue("@col_username", CType(gvShowUsers.Rows(e.RowIndex).FindControl("txtUsername"), TextBox).Text)
                 cmd.Parameters.AddWithValue("@col_personid", CType(gvShowUsers.Rows(e.RowIndex).FindControl("txtPersonID"), TextBox).Text)
@@ -99,6 +101,7 @@ Partial Class ManageUsers
                 cmd.Connection = con
                 con.Open()
                 cmd.ExecuteNonQuery()
+                con.Close()
                 gvShowUsers.EditIndex = -1
                 LoadGrid()
             End Using
@@ -113,6 +116,7 @@ Partial Class ManageUsers
                 cmd.Connection = con
                 con.Open()
                 cmd.ExecuteNonQuery()
+                con.Close()
                 LoadGrid()
             End Using
         End Using
